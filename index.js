@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const User = require('./users/model')
 
 const server = express()
 
@@ -19,7 +20,17 @@ server.post("/api/register", (req, res) => {
         })
     }
     else {
-        res.status(201).json(user)
+        User.insert(user)
+        .then(newUser => {
+            res.status(201).json(newUser)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                message: 'error registering user'
+            })
+        })
+        
     }
 })
 
