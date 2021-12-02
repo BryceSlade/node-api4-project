@@ -19,7 +19,7 @@ server.post("/api/register", (req, res) => {
         })
     }
     else {
-        return user
+        res.status(201).json(user)
     }
 })
 
