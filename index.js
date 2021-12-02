@@ -12,10 +12,19 @@ server.get('/api/users', (req, res) =>{
 })
 
 server.post("/api/register", (req, res) => {
+    const user = req.body
+    if (!user.username || !user.password) {
+        res.status(400).json({
+            message: 'Please provide both username and password'
+        })
+    }
+    else {
+        return user
+    }
 })
 
 server.post("/api/login", (req, res) => {
-    
+
 })
 
 const PORT = process.env.PORT || 8080
